@@ -30,6 +30,9 @@ from django.db import models
 
 from .managers import UserManager
 
+from datetime import datetime
+from django.utils import timezone
+import uuid
 
 class User(AbstractUser):
     username = None
@@ -69,3 +72,32 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+    
+
+
+class OTPVerification(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="otps"
+    )
+
+    otp = models.CharField(max_length=6)
+
+    expires_at = models.DateTimeField()
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        db_table = "otp_verification"
+
+    def __str__(self):
+        return f"{self.user.email} - {self.otp}"
