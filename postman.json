@@ -1,0 +1,126 @@
+{
+  "info": {
+    "name": "Django Student API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Students",
+      "item": [
+        {
+          "name": "Update Student by Existing Record",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": \"367c2587-e087-4248-af0f-e4771b97abcf\",\n  \"career_goal\": \"Backend Developer\",\n  \"cgpa\": \"3.80\",\n  \"current_address\": \"Delhi\",\n  \"permanent_address\": \"Mumbai\",\n  \"date_of_birth\": \"2000-01-01\",\n  \"gender\": \"MALE\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/students/",
+              "host": [
+                "127.0.0.1"
+              ],
+              "protocol": "http",
+              "port": "8000",
+              "path": [
+                "api",
+                "students"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Students",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/students/",
+              "host": [
+                "127.0.0.1"
+              ],
+              "protocol": "http",
+              "port": "8000",
+              "path": [
+                "api",
+                "students"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Student By ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/students/1/",
+              "host": [
+                "127.0.0.1"
+              ],
+              "protocol": "http",
+              "port": "8000",
+              "path": [
+                "api",
+                "students",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Student",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"career_goal\": \"Full Stack Developer\",\n  \"cgpa\": \"3.90\",\n  \"current_address\": \"Noida\",\n  \"permanent_address\": \"Lucknow\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/students/1/",
+              "host": [
+                "127.0.0.1"
+              ],
+              "protocol": "http",
+              "port": "8000",
+              "path": [
+                "api",
+                "students",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Student",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/students/1/",
+              "host": [
+                "127.0.0.1"
+              ],
+              "protocol": "http",
+              "port": "8000",
+              "path": [
+                "api",
+                "students",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -3,13 +3,14 @@ from .utils import send_otp_email , generate_otp
 from django.utils import timezone
 from datetime import timedelta
 from django.db import transaction
+from student.models import Student
 
 class UserService:
 
     @staticmethod
     @transaction.atomic
     def signup(validated_data):
-        otp = generate_otp()
+        
 
         validated_data.pop("confirm_password")
         password = validated_data.pop("password")
@@ -18,6 +19,11 @@ class UserService:
             password=password,
             **validated_data
         )
+
+        if user.role == "STUDENT":
+            Student.objects.create(user=user)
+            
+        otp = generate_otp()
 
         OTPVerification.objects.create(
             user=user,
@@ -89,9 +95,9 @@ class UserServicelist:
     def get_user_by_id(user_id):
         try:
             user = User.objects.get(
-    id=user_id,
-    is_verified=True,
-    is_active=True
+                id=user_id,
+                is_verified=True,
+                is_active=True
 )
             return user
         except User.DoesNotExist:

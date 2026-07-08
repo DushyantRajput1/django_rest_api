@@ -46,13 +46,14 @@ class User(AbstractUser):
 
     ROLE_CHOICES = (
         ("ADMIN", "Admin"),
-        ("USER", "User"),
+        ("STUDENT", "Student"),
+        ("TEACHER", "Teacher"),
     )
 
     role = models.CharField(
         max_length=20,
         choices=ROLE_CHOICES,
-        default="USER",
+        default="STUDENT",
     )
 
     is_verified = models.BooleanField(default=False)

@@ -6,6 +6,8 @@ class SignUpSerializer(serializers.ModelSerializer):
     last_name = serializers.CharField(required=True)
     password = serializers.CharField(write_only=True, min_length=8)
     confirm_password = serializers.CharField(write_only=True)
+    role = serializers.CharField(required=True)
+
     class Meta:
         model = User
         fields = ['email', 'phone_number', 'password', 'confirm_password', 'role','first_name', 'last_name']
@@ -36,6 +38,15 @@ class SignUpSerializer(serializers.ModelSerializer):
         if not value.strip():
             raise serializers.ValidationError("Last name is required.")
         return value
+    
+    def validate_role(self, value):
+        normalized_value = value.strip().upper()
+        allowed_roles = {role[0] for role in User.ROLE_CHOICES}
+
+        if normalized_value not in allowed_roles:
+            raise serializers.ValidationError("Role must be either STUDENT, TEACHER, or ADMIN.")
+
+        return normalized_value
 
 
 class OTPVerificationSerializer(serializers.Serializer):

@@ -12,9 +12,14 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import environ
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+REPO_ROOT = BASE_DIR.parent
+ENV_FILE = REPO_ROOT / ".env"
+
 env = environ.Env()
-environ.Env.read_env(BASE_DIR / ".env")
+if ENV_FILE.exists():
+    env.read_env(ENV_FILE)
 
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env.bool("DEBUG", default=True)
@@ -36,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'users'
+    'users',
+    'student',
+    'masters'
 ]
 
 MIDDLEWARE = [
